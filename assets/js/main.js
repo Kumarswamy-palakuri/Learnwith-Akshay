@@ -119,7 +119,7 @@ function renderHeader(active) {
       <div class="top-bar-right">
         <span class="top-item">🔓 100% Free · No Login Required</span>
         <span class="top-divider">|</span>
-        <a href="tel:${SITE.phone}" class="top-item top-phone">📞 Helpline: +91 ${SITE.phone}</a>
+        <a href="tel:${SITE.phone}" class="top-item top-phone">📞 Helpline: +91&nbsp;${SITE.phone}</a>
       </div>
     </div>
   </div>
@@ -128,12 +128,31 @@ function renderHeader(active) {
       ${LOGO}
       <div><div class="brand-name">LEARN WITH <span>AKSHAY</span></div><div class="brand-tag">${SITE.tagline}</div></div>
     </a>
-    <nav class="nav-links" aria-label="Main navigation">
+    <nav class="nav-links" id="main-nav-links" aria-label="Main navigation">
       ${NAV.map(([h, l, k]) => `<a href="${h}" class="${k === selected ? "active" : ""}"${k === selected ? ' aria-current="page"' : ""}>${l}</a>`).join("")}
+      ${SITE.phone ? `<a href="tel:${SITE.phone}" class="nav-phone-cta">📞 Student Helpline: +91&nbsp;${SITE.phone}</a>` : ""}
     </nav>
-    <button class="menu-btn" aria-label="Menu">${ICON.menu}</button>
-  </div>`;
-  $(".menu-btn", el).onclick = () => el.classList.toggle("open");
+    <button class="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav-links">${ICON.menu}</button>
+  </div>
+  <div class="nav-backdrop" aria-hidden="true"></div>`;
+
+  const menuBtn = $(".menu-btn", el);
+  const backdrop = $(".nav-backdrop", el);
+  const toggleMenu = (forceState) => {
+    const willOpen = forceState !== undefined ? forceState : !el.classList.contains("open");
+    el.classList.toggle("open", willOpen);
+    menuBtn.setAttribute("aria-expanded", String(willOpen));
+    menuBtn.innerHTML = willOpen
+      ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>`
+      : ICON.menu;
+    document.body.classList.toggle("menu-lock", willOpen);
+  };
+
+  menuBtn.onclick = () => toggleMenu();
+  if (backdrop) backdrop.onclick = () => toggleMenu(false);
+  el.querySelectorAll(".nav-links a").forEach(a => {
+    a.addEventListener("click", () => toggleMenu(false));
+  });
 }
 
 function renderFooter() {
@@ -141,7 +160,7 @@ function renderFooter() {
   if (!el) return;
   const socials = Object.entries(SITE.social).filter(([, u]) => u)
     .map(([k, u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${k}">${ICON[k]}</a>`).join("");
-  const phoneHtml = SITE.phone ? `<div class="phone-bar"><div class="container phone-bar-content"><span>📞 Student Helpline / WhatsApp: <a href="tel:${SITE.phone}">+91 ${SITE.phone}</a></span><span>·</span><span>100% Free Mock Tests, PYQs, Current Affairs &amp; Roadmaps</span><span>·</span><span class="badge-tag">No Registration Required</span></div></div>` : "";
+  const phoneHtml = SITE.phone ? `<div class="phone-bar"><div class="container phone-bar-content"><span class="phone-item">📞 Student Helpline: <a href="tel:${SITE.phone}">+91&nbsp;${SITE.phone}</a></span><span class="phone-dot">·</span><span class="phone-item">100% Free Mock Tests, PYQs &amp; Roadmaps</span><span class="phone-dot">·</span><span class="badge-tag">No Registration Required</span></div></div>` : "";
   el.innerHTML = phoneHtml + `
   <div class="strip"><div class="container strip-grid">
     <a href="index.html" class="brand">${LOGO}<div><div class="brand-name">LEARN WITH <span>AKSHAY</span></div><div class="brand-tag">${SITE.tagline}</div></div></a>
@@ -151,7 +170,7 @@ function renderFooter() {
     <div class="strip-item"><span class="ic">${ICON.wa}</span><div><strong>Current Affairs</strong><small>Daily Bilingual Notes</small></div></div>
   </div></div>
   <div class="foot"><div class="container foot-row">
-    <div>© ${SITE.year} ${SITE.name}. All rights reserved.${SITE.phone ? " · Helpline: +91 " + SITE.phone : ""} · Made in Bharat, from Andhra Pradesh.</div>
+    <div>© ${SITE.year} ${SITE.name}. All rights reserved.${SITE.phone ? " · Helpline: +91&nbsp;" + SITE.phone : ""} · Made in Bharat, from Andhra Pradesh.</div>
     <nav class="foot-links">${NAV.map(([h, l]) => `<a href="${h}">${l}</a>`).join("")}</nav>
     <div class="socials">${socials}<span>${SITE.domain}</span></div>
   </div></div>`;
@@ -175,10 +194,10 @@ function paperRow(p) {
   const e = examById(p.exam) || Object.assign({}, FALLBACK_EXAM, { name: p.exam });
   let action;
   const href = p.url ? p.url : (p.file ? "papers/" + encodeURI(p.file) : "");
-  if (!href) action = `<span class="chip" style="font-size:.72rem;padding:4px 10px;white-space:nowrap">Coming Soon</span>`;
+  if (!href) action = `<span class="chip paper-action-chip" style="font-size:.72rem;padding:4px 10px;white-space:nowrap">Coming Soon</span>`;
   else if (p.type === "pdf") action = `<a class="dl" href="${esc(href)}" target="_blank" rel="noopener" ${p.url ? "" : "download"}>${ICON.download} PDF</a>`;
   else action = `<a class="dl" href="${esc(href)}" target="_blank" rel="noopener">${ICON.eye} Open</a>`;
-  return `<tr><td><span class="ex">${examIcon(e, "sm")}${e.name}</span></td><td>${esc(p.title)}</td><td>${p.year}</td><td style="text-align:right">${action}</td></tr>`;
+  return `<tr><td class="col-exam"><span class="ex">${examIcon(e, "sm")}<span class="ex-name">${e.name}</span></span></td><td class="col-title">${esc(p.title)} <span class="mobile-year">${p.year}</span></td><td class="col-year">${p.year}</td><td class="col-action" style="text-align:right">${action}</td></tr>`;
 }
 
 function waCard(c) {
@@ -203,11 +222,11 @@ function mountPapers(root, limit) {
   let filter = "all", q = "";
   root.innerHTML = `
     <div class="sec-head" style="margin-bottom:12px">
-      <div class="chips">${[["all", "All Exams"], ...used.map(id => [id, examById(id).name])]
+      <div class="chips" aria-label="Filter by exam">${[["all", "All Exams"], ...used.map(id => [id, examById(id).name])]
         .map(([id, l]) => `<button class="chip ${id === "all" ? "active" : ""}" data-f="${id}">${l}</button>`).join("")}</div>
-      <label class="search">${ICON.search}<input type="search" placeholder="Search papers..."></label>
+      <label class="search">${ICON.search}<input type="search" placeholder="Search papers..." aria-label="Search papers"></label>
     </div>
-    <div class="tbl-wrap"><table><thead><tr><th>Exam</th><th>Paper</th><th>Year</th><th>Action</th></tr></thead><tbody></tbody></table></div>`;
+    <div class="tbl-wrap"><table><thead><tr><th class="col-exam">Exam</th><th class="col-title">Paper</th><th class="col-year">Year</th><th class="col-action" style="text-align:right">Action</th></tr></thead><tbody></tbody></table></div>`;
   const tbody = $("tbody", root);
   const draw = () => {
     let rows = PAPERS.filter(p => (filter === "all" || p.exam === filter) && p.title.toLowerCase().includes(q));
@@ -359,9 +378,9 @@ const PAGES = {
     document.title = `${e.name} — ${e.full} | Learn with Akshay`;
     $("#exam-hero").innerHTML = `
       <div class="crumbs"><a href="index.html">Home</a> / <a href="exams.html">Exams</a> / ${e.name}</div>
-      <div style="display:flex;gap:18px;align-items:center;position:relative;z-index:1">${examIcon(e, "lg")}
-        <div><h1>${e.name}</h1><p>${e.full}</p>
-        ${e.subs && e.subs.length ? `<p style="margin-top:6px;font-size:.9rem;color:var(--o600);font-weight:600">${e.subs.length} sub-exams available — Group / category wise</p>` : ""}
+      <div class="exam-hero-header">${examIcon(e, "lg")}
+        <div><h1>${e.name}</h1><p class="exam-lead">${e.full}</p>
+        ${e.subs && e.subs.length ? `<p class="exam-sub-badge">${e.subs.length} sub-exams available — Group / category wise</p>` : ""}
         <p class="no-login" style="margin-top:10px">No login required on website — mock tests, papers, roadmaps &amp; current affairs are free to explore.</p>
         </div></div>`;
     const patternHTML = e.pattern.length ? e.pattern.map(s => `
@@ -396,7 +415,7 @@ const PAGES = {
         ` : ""}
         <div class="info-grid">${e.facts.map(([k, v]) => `<div class="card info"><small>${k}</small><b>${v}</b></div>`).join("")}</div>
         ${e.subjects.length ? `<h3 style="margin:26px 0 12px">Important Subjects</h3><div class="chips">${e.subjects.map(s => `<span class="chip">${s}</span>`).join("")}</div>` : ""}
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
+        <div class="exam-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
           ${e.official ? `<a class="btn btn-outline" href="${e.official}" target="_blank" rel="noopener">Official Website ${ICON.ext}</a>` : ""}
           ${myCh && myCh.url ? `<a class="btn btn-outline" href="${myCh.url}" target="_blank" rel="noopener">${ICON.wa} Join ${e.name} Channel</a>` : ""}
           <a class="btn btn-primary" href="${SITE.playStoreUrl}" target="_blank" rel="noopener">${ICON.play} Free Mock Tests in App</a>
@@ -409,7 +428,7 @@ const PAGES = {
       </div>
       <div class="tab-pane" id="t-roadmap" role="tabpanel" aria-labelledby="tab-roadmap">${roadmapHTML}</div>
       <div class="tab-pane" id="t-papers" role="tabpanel" aria-labelledby="tab-papers">
-        <div class="card tbl-wrap"><table><thead><tr><th>Exam</th><th>Paper</th><th>Year</th><th>Action</th></tr></thead>
+        <div class="card tbl-wrap"><table><thead><tr><th class="col-exam">Exam</th><th class="col-title">Paper</th><th class="col-year">Year</th><th class="col-action" style="text-align:right">Action</th></tr></thead>
         <tbody>${myPapers.length ? myPapers.map(paperRow).join("") : `<tr><td colspan="4" class="empty">Papers will be added soon.</td></tr>`}</tbody></table></div>
         <a class="link-arrow" style="margin-top:14px" href="papers.html?exam=${e.id}">All ${e.name} papers ${ICON.arrow}</a>
       </div>`;
