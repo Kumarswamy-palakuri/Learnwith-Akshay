@@ -1,6 +1,14 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
-Disallow: /papers/
+
+# Google AdSense Crawler
+User-agent: Mediapartners-Google
+Allow: /
+
+# Google Search Crawler
+User-agent: Googlebot
+Allow: /
+Disallow: /admin.html
 
 Sitemap: https://www.vibhillionai.com/sitemap.xml

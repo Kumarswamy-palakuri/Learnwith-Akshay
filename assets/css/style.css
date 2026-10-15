@@ -3616,3 +3616,338 @@ a.wa-btn:hover {
     scroll-behavior: auto !important;
   }
 }
+
+/* =========================================================
+   Google AdSense & Monetization Infrastructure
+   Compliant with Google AdSense Quality & Placement Policies
+   ========================================================= */
+
+.ad-unit-container {
+  width: 100%;
+  margin: 28px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ad-disclaimer-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--neutral-400);
+  margin-bottom: 6px;
+  user-select: none;
+}
+
+.ad-content-slot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ad-placeholder-box {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.95), rgba(241, 245, 249, 0.9));
+  border: 1px dashed var(--neutral-300);
+  border-radius: var(--radius-sm);
+  padding: 20px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ad-placeholder-box:hover {
+  border-color: var(--brand-500);
+  background: #ffffff;
+}
+
+.ad-placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ad-google-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid var(--neutral-200);
+  border-radius: 9999px;
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--neutral-700);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.ad-slot-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--brand-950);
+}
+
+.ad-slot-meta {
+  font-size: 0.74rem;
+  color: var(--neutral-500);
+  font-weight: 500;
+}
+
+/* Specific standard AdSense placement containers */
+.ad-leaderboard {
+  max-width: 970px;
+  min-height: 90px;
+}
+
+.ad-in-article {
+  max-width: 760px;
+  min-height: 110px;
+  margin: 32px auto;
+}
+
+.ad-sidebar {
+  max-width: 336px;
+  min-height: 250px;
+}
+
+.ad-in-feed {
+  max-width: 100%;
+  margin: 20px 0;
+}
+
+.ad-footer-banner {
+  max-width: 970px;
+  min-height: 90px;
+  margin: 32px auto 8px;
+}
+
+/* =========================================================
+   GDPR & AdSense Cookie Consent Notice Bar
+   ========================================================= */
+
+.cookie-consent-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  background: rgba(6, 21, 45, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.35);
+  padding: 16px 0;
+  animation: cookieSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cookieSlideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.cookie-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cookie-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.cookie-ic {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.cookie-text p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #cbd5e1;
+}
+
+.cookie-text strong {
+  color: #ffffff;
+}
+
+.cookie-text a {
+  color: var(--amber-500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cookie-text a:hover {
+  color: #ffffff;
+}
+
+.cookie-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.cookie-actions .btn-sm {
+  padding: 8px 16px;
+  font-size: 0.82rem;
+}
+
+.cookie-actions .btn-outline {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #f1f5f9;
+}
+
+.cookie-actions .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* =========================================================
+   AdSense Multi-Column Site Footer
+   ========================================================= */
+
+.footer-columns-wrap {
+  background: var(--brand-950);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 48px 0 36px;
+  color: #cbd5e1;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.1fr 1.1fr 1.4fr;
+  gap: 40px;
+}
+
+.col-brand .brand {
+  margin-bottom: 12px;
+}
+
+.col-brand .brand-name {
+  color: #ffffff;
+}
+
+.brand-desc {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin: 12px 0 16px;
+  max-width: 380px;
+}
+
+.footer-trust-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.footer-trust-chips .chip-sm {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+.footer-col h4 {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.foot-col-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.foot-col-links li a {
+  color: #94a3b8;
+  font-size: 0.86rem;
+  text-decoration: none;
+  transition: color 0.15s ease, transform 0.15s ease;
+  display: inline-block;
+}
+
+.foot-col-links li a:hover {
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+.foot-col-links li a strong {
+  color: #f1f5f9;
+}
+
+.copy-text {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.84rem;
+}
+
+.ads-ready-badge {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  color: #4ade80;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.02em;
+}
+
+/* Responsive Footer Breakpoints */
+@media (max-width: 980px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .cookie-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cookie-actions {
+    justify-content: flex-end;
+  }
+}
+

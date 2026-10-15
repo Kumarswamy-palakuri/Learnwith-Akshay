@@ -232,6 +232,32 @@
           <label class="f">Telegram<input data-soc="telegram" placeholder="https://t.me/..."></label>
           <label class="f">X (Twitter)<input data-soc="x" placeholder="https://x.com/..."></label>
         </div>
+        <h3 style="font-size:1rem;margin:22px 0 10px;color:var(--brand-950)">💰 Google AdSense &amp; Monetization</h3>
+        <p class="sub" style="margin-bottom:12px">When your site is approved by Google AdSense, paste your Publisher ID below. The site automatically embeds your official script and loads real ads.</p>
+        <div class="row">
+          <label class="f">AdSense Publisher ID <span class="h">e.g. ca-pub-1234567890123456</span>
+            <input data-ads="publisherId" placeholder="ca-pub-XXXXXXXXXXXXXXXX">
+          </label>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <label class="f" style="flex-direction:row;align-items:center;gap:8px">
+            <input type="checkbox" data-ads-chk="enabled" checked> Enable AdSense Units
+          </label>
+          <label class="f" style="flex-direction:row;align-items:center;gap:8px">
+            <input type="checkbox" data-ads-chk="showPlaceholders" checked> Show AdSense Placement Guides (Before approval)
+          </label>
+        </div>
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:12px 14px;margin-top:14px;font-size:.82rem;color:#166534">
+          <strong>✓ AdSense Eligibility Checklist (All Configured):</strong>
+          <ul style="margin:6px 0 0;padding-left:18px;line-height:1.6">
+            <li><a href="privacy.html" target="_blank" style="color:#15803d;font-weight:600">Privacy Policy</a> (with Google DART cookie &amp; third-party ad disclosures)</li>
+            <li><a href="terms.html" target="_blank" style="color:#15803d;font-weight:600">Terms and Conditions</a></li>
+            <li><a href="disclaimer.html" target="_blank" style="color:#15803d;font-weight:600">Disclaimer &amp; Non-Affiliation Statement</a></li>
+            <li><a href="contact.html" target="_blank" style="color:#15803d;font-weight:600">Contact Us Page</a> with working inquiry form &amp; helpline</li>
+            <li>Root <a href="ads.txt" target="_blank" style="color:#15803d;font-weight:600">ads.txt</a> file &amp; updated robots.txt allowing Mediapartners-Google</li>
+            <li>GDPR / EU Cookie Consent Banner auto-loaded on all pages</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -838,10 +864,15 @@ $("#addChannel").onclick = () => { data.channels.push({ exam: (data.exams[0] || 
 /* ---------- SETTINGS ---------- */
 function renderSettings() {
   $$("[data-s]").forEach(i => i.value = data.site[i.dataset.s] || "");
-  $$("[data-soc]").forEach(i => i.value = data.site.social[i.dataset.soc] || "");
+  $$("[data-soc]").forEach(i => i.value = (data.site.social && data.site.social[i.dataset.soc]) || "");
+  data.site.adsense = data.site.adsense || { enabled: true, publisherId: "ca-pub-XXXXXXXXXXXXXXXX", showPlaceholders: true };
+  $$("[data-ads]").forEach(i => i.value = data.site.adsense[i.dataset.ads] || "");
+  $$("[data-ads-chk]").forEach(i => i.checked = data.site.adsense[i.dataset.adsChk] !== false);
 }
 $$("[data-s]").forEach(i => i.addEventListener("input", () => { data.site[i.dataset.s] = i.value.trim(); markDirty(); }));
-$$("[data-soc]").forEach(i => i.addEventListener("input", () => { data.site.social[i.dataset.soc] = i.value.trim(); markDirty(); }));
+$$("[data-soc]").forEach(i => i.addEventListener("input", () => { data.site.social = data.site.social || {}; data.site.social[i.dataset.soc] = i.value.trim(); markDirty(); }));
+$$("[data-ads]").forEach(i => i.addEventListener("input", () => { data.site.adsense = data.site.adsense || {}; data.site.adsense[i.dataset.ads] = i.value.trim(); markDirty(); }));
+$$("[data-ads-chk]").forEach(i => i.addEventListener("change", () => { data.site.adsense = data.site.adsense || {}; data.site.adsense[i.dataset.adsChk] = i.checked; markDirty(); }));
 
 function renderAll() {
   if (!curExam || !examById(curExam)) curExam = (data.exams[0] || {}).id || null;

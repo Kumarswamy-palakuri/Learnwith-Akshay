@@ -13,6 +13,7 @@ try {
 } catch (e) { /* storage unavailable */ }
 const SITE = Object.assign({ name: "Learn with Akshay", tagline: "", domain: "", phone: "", playStoreUrl: "#", social: {} }, RAW.site || {});
 SITE.social = SITE.social || {};
+SITE.adsense = Object.assign({ enabled: true, publisherId: "ca-pub-XXXXXXXXXXXXXXXX", showPlaceholders: true }, (RAW.site && RAW.site.adsense) || {});
 SITE.year = new Date().getFullYear();
 const EXAMS = (RAW.exams || []).map(e => Object.assign({ full: "", icon: "other", color: "#0f346c", about: "", official: "", facts: [], pattern: [], subjects: [], roadmap: [], subs: [] }, e));
 const MAGAZINES = RAW.magazines || [];
@@ -83,7 +84,7 @@ const PLAY_ICON = `<svg viewBox="0 0 24 24"><path fill="#34a853" d="M3.6 2.3l10.
 
 /* ---------- Helpers ---------- */
 const $ = (s, el = document) => el.querySelector(s);
-const examById = id => EXAMS.find(e => e.id === id);
+const examById = id => EXAMS.find(e => e.id === id || (id === "bank" && e.id === "banking") || (id === "banking" && e.id === "bank"));
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const examIcon = (e, size = "") => `<span class="exam-icon ${size}" style="background:${esc(e.color || "#555")}">${ICON[e.icon] || ICON.other}</span>`;
 const param = k => new URLSearchParams(location.search).get(k);
@@ -97,7 +98,8 @@ const NAV = [
   ["papers.html", "Model Papers", "papers"],
   ["blog.html", "Blog", "blog"],
   ["whatsapp.html", "WhatsApp", "whatsapp"],
-  ["about.html", "About", "about"]
+  ["about.html", "About", "about"],
+  ["contact.html", "Contact", "contact"]
 ];
 
 function renderHeader(active) {
@@ -106,7 +108,6 @@ function renderHeader(active) {
   const m = $("main");
   if (m && !m.id) m.id = "main";
   const selected = active === "home" && location.hash === "#ai-features" ? "ai" : active;
-  const selectedNav = NAV.find(([, , key]) => key === selected) || NAV[0];
   el.className = "site-header";
   el.innerHTML = `
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -155,25 +156,173 @@ function renderHeader(active) {
   });
 }
 
+/* ---------- Google AdSense Integration & Ad Unit Helpers ---------- */
+function renderAdUnit(type = "leaderboard", slotId = "0000000000", extraClasses = "") {
+  const adConfig = SITE.adsense || { enabled: true, publisherId: "ca-pub-XXXXXXXXXXXXXXXX", showPlaceholders: true };
+  if (!adConfig.enabled) return "";
+  
+  const isRealPub = adConfig.publisherId && adConfig.publisherId !== "ca-pub-XXXXXXXXXXXXXXXX";
+  
+  if (isRealPub) {
+    return `
+    <div class="ad-unit-container ad-${type} ${extraClasses}">
+      <div class="ad-disclaimer-label">Advertisement</div>
+      <div class="ad-content-slot">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="${esc(adConfig.publisherId)}"
+             data-ad-slot="${esc(slotId)}"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+      </div>
+    </div>`;
+  }
+
+  if (adConfig.showPlaceholders !== false) {
+    const specs = {
+      leaderboard: { title: "Responsive Top Leaderboard", dim: "728×90 / 320×100 Adaptive" },
+      "in-article": { title: "In-Article Content Placement", dim: "Fluid Responsive / Native" },
+      sidebar: { title: "Sidebar Display Placement", dim: "300×250 / 300×600 Half-Page" },
+      "in-feed": { title: "In-Feed Contextual Banner", dim: "Full Width Card Responsive" },
+      "footer-banner": { title: "Pre-Footer Anchor Unit", dim: "728×90 / 970×90 Leaderboard" }
+    }[type] || { title: "Responsive Ad Unit", dim: "Auto-adaptive" };
+
+    return `
+    <div class="ad-unit-container ad-${type} ${extraClasses}">
+      <div class="ad-disclaimer-label">Advertisement</div>
+      <div class="ad-placeholder-box">
+        <div class="ad-placeholder-inner">
+          <div class="ad-google-badge">
+            <svg class="ad-g-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path fill="#4285F4" d="M23.7 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.6c-.3 1.5-1.1 2.8-2.4 3.7v3h3.9c2.3-2.1 3.6-5.2 3.6-8.9z"/>
+              <path fill="#34A853" d="M12 24c3.3 0 6-1.1 8-3l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.8-5H1.2v3.1C3.3 21.4 7.4 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.2 14.2c-.2-.7-.4-1.5-.4-2.2s.2-1.5.4-2.2V6.7H1.2C.4 8.3 0 10.1 0 12s.4 3.7 1.2 5.3l4-3.1z"/>
+              <path fill="#EA4335" d="M12 4.8c1.8 0 3.4.6 4.7 1.8l3.5-3.5C18 1.2 15.2 0 12 0 7.4 0 3.3 2.6 1.2 6.7l4 3.1c1-2.9 3.7-5 6.8-5z"/>
+            </svg>
+            <span>Google AdSense Slot</span>
+          </div>
+          <strong class="ad-slot-title">${specs.title}</strong>
+          <span class="ad-slot-meta">${specs.dim} · Policy Compliant Placement</span>
+        </div>
+      </div>
+    </div>`;
+  }
+  return "";
+}
+
+function initAdSense() {
+  const adConfig = SITE.adsense;
+  if (!adConfig || !adConfig.enabled) return;
+  if (adConfig.publisherId && adConfig.publisherId !== "ca-pub-XXXXXXXXXXXXXXXX") {
+    if (!document.querySelector('script[src*="pagead2.googlesyndication.com"]')) {
+      const s = document.createElement("script");
+      s.async = true;
+      s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(adConfig.publisherId)}`;
+      s.crossOrigin = "anonymous";
+      document.head.appendChild(s);
+    }
+    setTimeout(() => {
+      try {
+        document.querySelectorAll(".adsbygoogle").forEach(() => {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        });
+      } catch (e) {}
+    }, 400);
+  }
+}
+
+function initCookieConsent() {
+  if (localStorage.getItem("vibhi_cookie_consent")) return;
+  const banner = document.createElement("aside");
+  banner.id = "cookie-consent-banner";
+  banner.className = "cookie-consent-bar";
+  banner.setAttribute("aria-label", "Cookie and Privacy Consent");
+  banner.innerHTML = `
+    <div class="container cookie-content">
+      <div class="cookie-text">
+        <span class="cookie-ic">🍪</span>
+        <p><strong>We value your privacy:</strong> We and our advertising partners (including Google AdSense) use cookies to personalize content and ads, analyze traffic, and ensure the best study experience. Review our <a href="privacy.html">Privacy Policy</a> &amp; <a href="terms.html">Terms</a>.</p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn-outline btn-sm" id="cookie-settings-btn">Cookie Info</button>
+        <button type="button" class="btn btn-primary btn-sm" id="cookie-accept-btn">Accept All</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(banner);
+  document.getElementById("cookie-accept-btn").onclick = () => {
+    localStorage.setItem("vibhi_cookie_consent", "accepted");
+    banner.remove();
+  };
+  document.getElementById("cookie-settings-btn").onclick = () => {
+    window.location.href = "privacy.html#cookies";
+  };
+}
+
 function renderFooter() {
   const el = $("#site-footer");
   if (!el) return;
   const socials = Object.entries(SITE.social).filter(([, u]) => u)
     .map(([k, u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${k}">${ICON[k]}</a>`).join("");
   const phoneHtml = SITE.phone ? `<div class="phone-bar"><div class="container phone-bar-content"><span class="phone-item">📞 Student Helpline: <a href="tel:${SITE.phone}">+91&nbsp;${SITE.phone}</a></span><span class="phone-dot">·</span><span class="phone-item">100% Free Mock Tests, PYQs &amp; Roadmaps</span><span class="phone-dot">·</span><span class="badge-tag">No Registration Required</span></div></div>` : "";
+  
   el.innerHTML = phoneHtml + `
-  <div class="strip"><div class="container strip-grid">
-    <a href="index.html" class="brand">${LOGO}<div><div class="brand-name">LEARN WITH <span>AKSHAY</span></div><div class="brand-tag">${SITE.tagline}</div></div></a>
-    <div class="strip-item"><span class="ic">${ICON.grid}</span><div><strong>10+ Major Exams</strong><small>One Unified Platform</small></div></div>
-    <div class="strip-item"><span class="ic">${ICON.route}</span><div><strong>Expert Roadmaps</strong><small>Curated Study Plans</small></div></div>
-    <div class="strip-item"><span class="ic">${ICON.doc}</span><div><strong>Mock Tests &amp; PYQs</strong><small>Real Exam Patterns</small></div></div>
-    <div class="strip-item"><span class="ic">${ICON.wa}</span><div><strong>Current Affairs</strong><small>Daily Bilingual Notes</small></div></div>
-  </div></div>
-  <div class="foot"><div class="container foot-row">
-    <div>© ${SITE.year} ${SITE.name}. All rights reserved.${SITE.phone ? " · Helpline: +91&nbsp;" + SITE.phone : ""} · Made in Bharat, from Andhra Pradesh.</div>
-    <nav class="foot-links">${NAV.map(([h, l]) => `<a href="${h}">${l}</a>`).join("")}</nav>
-    <div class="socials">${socials}<span>${SITE.domain}</span></div>
-  </div></div>`;
+  <div class="footer-columns-wrap">
+    <div class="container footer-grid">
+      <div class="footer-col col-brand">
+        <a href="index.html" class="brand">${LOGO}<div><div class="brand-name">LEARN WITH <span>AKSHAY</span></div><div class="brand-tag">${SITE.tagline}</div></div></a>
+        <p class="brand-desc">Telugu-first AI-powered competitive exam preparation platform from Andhra Pradesh. Empowering lakhs of aspirants across Bharat with free mock tests, structured roadmaps, and daily bilingual notes.</p>
+        <div class="footer-trust-chips">
+          <span class="chip-sm">🇮🇳 Made in Bharat</span>
+          <span class="chip-sm">🔓 100% Free on Web</span>
+          <span class="chip-sm">⚡ AI Doubt Solver</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Target Exams</h4>
+        <ul class="foot-col-links">
+          <li><a href="exam.html?id=upsc">UPSC Civil Services</a></li>
+          <li><a href="exam.html?id=appsc">APPSC Group 1, 2 &amp; 4</a></li>
+          <li><a href="exam.html?id=tgpsc">TGPSC Group 1, 2 &amp; 3</a></li>
+          <li><a href="exam.html?id=ssc">SSC CGL, CHSL, MTS</a></li>
+          <li><a href="exam.html?id=banking">IBPS &amp; SBI Banking</a></li>
+          <li><a href="exam.html?id=rrb">RRB NTPC &amp; Railways</a></li>
+          <li><a href="exams.html">View All 10+ Exams →</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Study Resources</h4>
+        <ul class="foot-col-links">
+          <li><a href="roadmaps.html">Curated Study Roadmaps</a></li>
+          <li><a href="papers.html">Model Papers &amp; PYQs</a></li>
+          <li><a href="blog.html">Strategy &amp; Current Affairs</a></li>
+          <li><a href="whatsapp.html">Free WhatsApp Channels</a></li>
+          <li><a href="index.html#ai-features">AI Doubts &amp; Mind Maps</a></li>
+          <li><a href="sitemap.xml">XML Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; AdSense Policies</h4>
+        <ul class="foot-col-links">
+          <li><a href="privacy.html"><strong>Privacy Policy</strong></a></li>
+          <li><a href="terms.html"><strong>Terms &amp; Conditions</strong></a></li>
+          <li><a href="disclaimer.html"><strong>Disclaimer &amp; Non-Affiliation</strong></a></li>
+          <li><a href="contact.html"><strong>Contact Us</strong></a></li>
+          <li><a href="about.html">About Our Mission</a></li>
+          <li><a href="privacy.html#cookies">Cookie Preferences</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="container foot-row">
+      <div class="copy-text">
+        © ${SITE.year} ${SITE.name}. All rights reserved.${SITE.phone ? " · Helpline: +91&nbsp;" + SITE.phone : ""} · Made in Bharat, from Andhra Pradesh.
+        <span class="ads-ready-badge">✓ Google AdSense Ready</span>
+      </div>
+      <div class="socials">${socials}<span>${SITE.domain}</span></div>
+    </div>
+  </div>`;
 }
 
 /* ---------- Reusable blocks ---------- */
@@ -331,6 +480,12 @@ const PAGES = {
       }
     }
     $("#popular").innerHTML = EXAMS.map(examCard).join("");
+    const topAd = $("#home-top-ad");
+    if (topAd) topAd.innerHTML = renderAdUnit("leaderboard", "1001001001");
+    const midAd = $("#home-mid-ad");
+    if (midAd) midAd.innerHTML = renderAdUnit("in-feed", "2002002002");
+    const bottomAd = $("#home-bottom-ad");
+    if (bottomAd) bottomAd.innerHTML = renderAdUnit("footer-banner", "3003003003");
     $("#rm-mini").innerHTML = EXAMS.filter(e => e.roadmap.length).slice(0, 6).map(roadmapMini).join("");
     mountPapers($("#papers-mini"), 4);
     $("#wa-mini").innerHTML = CHANNELS.map(waCard).join("");
@@ -342,6 +497,8 @@ const PAGES = {
   exams() {
     const root = $("#all-exams");
     if (!root) return;
+    const topAd = $("#exams-top-ad");
+    if (topAd) topAd.innerHTML = renderAdUnit("leaderboard", "6006006006");
     const renderList = (filterText = "") => {
       const q = filterText.toLowerCase();
       const filtered = EXAMS.filter(e =>
@@ -375,12 +532,14 @@ const PAGES = {
   exam() {
     const e = examById(param("id")) || EXAMS[0];
     if (!e) return;
-    document.title = `${e.name} — ${e.full} | Learn with Akshay`;
+    const subId = param("sub");
+    const activeSub = subId && e.subs ? e.subs.find(s => s.id === subId) : null;
+    document.title = activeSub ? `${activeSub.name} — ${activeSub.full || e.name} | Learn with Akshay` : `${e.name} — ${e.full} | Learn with Akshay`;
     $("#exam-hero").innerHTML = `
-      <div class="crumbs"><a href="index.html">Home</a> / <a href="exams.html">Exams</a> / ${e.name}</div>
+      <div class="crumbs"><a href="index.html">Home</a> / <a href="exams.html">Exams</a> / <a href="exam.html?id=${e.id}">${e.name}</a>${activeSub ? ` / ${esc(activeSub.name)}` : ""}</div>
       <div class="exam-hero-header">${examIcon(e, "lg")}
-        <div><h1>${e.name}</h1><p class="exam-lead">${e.full}</p>
-        ${e.subs && e.subs.length ? `<p class="exam-sub-badge">${e.subs.length} sub-exams available — Group / category wise</p>` : ""}
+        <div><h1>${activeSub ? esc(activeSub.name) + " — " + esc(e.name) : e.name}</h1><p class="exam-lead">${activeSub && activeSub.full ? esc(activeSub.full) : e.full}</p>
+        ${e.subs && e.subs.length ? `<p class="exam-sub-badge">${activeSub ? `Selected category: <strong>${esc(activeSub.name)}</strong> · ` : ""}${e.subs.length} sub-exams available — Group / category wise</p>` : ""}
         <p class="no-login" style="margin-top:10px">No login required on website — mock tests, papers, roadmaps &amp; current affairs are free to explore.</p>
         </div></div>`;
     const patternHTML = e.pattern.length ? e.pattern.map(s => `
@@ -399,17 +558,27 @@ const PAGES = {
         <button class="tab active" role="tab" id="tab-overview" aria-controls="t-overview" aria-selected="true" data-t="overview">Overview</button>
         <button class="tab" role="tab" id="tab-pattern" aria-controls="t-pattern" aria-selected="false" data-t="pattern">Exam Pattern</button>
         <button class="tab" role="tab" id="tab-roadmap" aria-controls="t-roadmap" aria-selected="false" data-t="roadmap">Roadmap</button>
-        <button class="tab" role="tab" id="tab-papers" aria-controls="t-papers" aria-selected="false" data-t="papers">Papers</button>
+        <button class="tab" role="tab" id="tab-papers" aria-controls="t-papers" aria-selected="false" data-t="papers">Papers (${myPapers.length})</button>
       </div>
       <div class="tab-pane active" id="t-overview" role="tabpanel" aria-labelledby="tab-overview">
+        ${activeSub ? `
+          <div class="sub-exam-banner" style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:16px 18px;margin-bottom:18px">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+              <span class="chip" style="background:var(--brand-800);color:#fff">Selected: ${esc(activeSub.name)}</span>
+              <a href="exam.html?id=${e.id}" style="font-size:.82rem;font-weight:600;color:var(--brand-700)">Show all ${esc(e.name)} categories ✕</a>
+            </div>
+            <h3 style="margin:8px 0 4px;font-size:1.15rem">${esc(activeSub.name)} — ${esc(activeSub.full || e.name)}</h3>
+            <p style="font-size:.86rem;color:var(--ink2);margin:0">Explore pattern, syllabus roadmap and interactive model papers below.</p>
+          </div>
+        ` : ""}
         <p style="color:var(--ink2);margin-bottom:18px;max-width:760px">${e.about}</p>
         ${e.subs && e.subs.length ? `
           <h3 style="margin:8px 0 12px">Choose Sub-Exam / Category</h3>
           <div class="sub-exam-grid">${e.subs.map(s => `
-            <a class="sub-exam-card" href="exam.html?id=${e.id}&sub=${s.id}">
+            <a class="sub-exam-card${s.id === subId ? " active" : ""}" href="exam.html?id=${e.id}&sub=${s.id}" style="${s.id === subId ? "border-color:var(--brand-600);background:#eff6ff" : ""}">
               <h4>${s.name}</h4>
               <p>${s.full || ""}</p>
-              <span class="link-arrow" style="font-size:.82rem;margin-top:auto">View details ${ICON.arrow}</span>
+              <span class="link-arrow" style="font-size:.82rem;margin-top:auto">${s.id === subId ? "✓ Currently Viewing" : "View details " + ICON.arrow}</span>
             </a>`).join("")}</div>
           <p style="font-size:.82rem;color:var(--muted);margin:10px 0 18px">You can also add custom categories from the Admin Panel.</p>
         ` : ""}
@@ -446,6 +615,8 @@ const PAGES = {
   },
 
   roadmaps() {
+    const topAd = $("#roadmaps-top-ad");
+    if (topAd) topAd.innerHTML = renderAdUnit("leaderboard", "7007007007");
     $("#rm-list").innerHTML = EXAMS.filter(e => e.roadmap.length).map(e => `
       <a class="card panel" href="exam.html?id=${e.id}#roadmap" style="display:flex;flex-direction:column;gap:12px">
         <div style="display:flex;gap:12px;align-items:center">${examIcon(e)}<div><h3 style="font-size:1.1rem">${e.name} Roadmap</h3>
@@ -455,7 +626,11 @@ const PAGES = {
       </a>`).join("");
   },
 
-  papers() { mountPapers($("#papers-full")); },
+  papers() {
+    const topAd = $("#papers-top-ad");
+    if (topAd) topAd.innerHTML = renderAdUnit("leaderboard", "8008008008");
+    mountPapers($("#papers-full"));
+  },
 
   whatsapp() {
     $("#wa-full").innerHTML = CHANNELS.map(waCard).join("");
@@ -467,6 +642,10 @@ const PAGES = {
   blog() {
     const root = $("#blog-list");
     if (!root) return;
+    const topAd = $("#blog-top-ad");
+    if (topAd) topAd.innerHTML = renderAdUnit("leaderboard", "4004004004");
+    const bottomAd = $("#blog-bottom-ad");
+    if (bottomAd) bottomAd.innerHTML = renderAdUnit("footer-banner", "5005005005");
     if (!BLOG.length) {
       root.innerHTML = `<p class="empty">Articles coming soon.</p>`;
       return;
@@ -493,7 +672,7 @@ const PAGES = {
       return;
     }
     const title = a.title_en || a.title || a.id;
-    const body = a.body_en || a.body || "<p>Content coming soon.</p>";
+    let body = a.body_en || a.body || "<p>Content coming soon.</p>";
     document.title = `${title} | Learn with Akshay`;
     const descMeta = document.querySelector('meta[name="description"]');
     if (descMeta) descMeta.setAttribute("content", a.desc_en || a.desc || title);
@@ -506,6 +685,19 @@ const PAGES = {
       <h1>${esc(title)}</h1>
       <p class="no-login" style="margin-top:12px">No Login Required (Web)</p>`;
     const cover = a.image ? `<div class="article-cover"><img src="${esc(a.image)}" alt="${esc(title)}"></div>` : "";
+    
+    // Policy compliant in-article Ad Unit insertion
+    const inArticleAd = renderAdUnit("in-article", "5566778899");
+    const h3Matches = [...body.matchAll(/<h3>/g)];
+    if (h3Matches.length >= 2) {
+      const splitPos = h3Matches[1].index;
+      body = body.slice(0, splitPos) + inArticleAd + body.slice(splitPos);
+    } else {
+      body = body + inArticleAd;
+    }
+
+    const preShareAd = renderAdUnit("footer-banner", "6677889900");
+
     const share = `<div class="share-bar">
       <span class="share-label">Share:</span>
       <a class="share-btn wa" href="https://wa.me/?text=${shareText}%20${shareUrl}" target="_blank" rel="noopener">WhatsApp</a>
@@ -514,7 +706,7 @@ const PAGES = {
       <a class="share-btn fb" href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank" rel="noopener">Facebook</a>
       <button type="button" class="share-btn copy" id="share-copy">Copy link</button>
     </div>`;
-    $("#article-body").innerHTML = cover + body + share;
+    $("#article-body").innerHTML = cover + body + preShareAd + share;
     const copyBtn = $("#share-copy");
     if (copyBtn) copyBtn.onclick = async () => {
       try { await navigator.clipboard.writeText(pageUrl); copyBtn.textContent = "Copied!"; setTimeout(() => copyBtn.textContent = "Copy link", 1500); }
@@ -531,4 +723,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-icon]").forEach(el => el.innerHTML = ICON[el.dataset.icon] || "");
   document.querySelectorAll("[data-logo]").forEach(el => el.innerHTML = LOGO);
   PAGES[page] && PAGES[page]();
+  initAdSense();
+  initCookieConsent();
 });

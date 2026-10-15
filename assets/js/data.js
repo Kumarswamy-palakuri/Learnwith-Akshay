@@ -9,12 +9,17 @@ window.VIBHI_DATA = {
     "tagline": "One Stop Destination for Your Exam Success",
     "domain": "www.vibhillionai.com",
     "phone": "70328 00484",
-    "playStoreUrl": "https://play.google.com/store/apps/details?id=YOUR.APP.ID",
+    "playStoreUrl": "https://wa.me/917032800484?text=Hi%20Akshay%2C%20please%20send%20me%20the%20Learn%20with%20Akshay%20App%20download%20link%20and%20daily%20free%20study%20notes",
     "social": {
       "youtube": "",
       "instagram": "",
       "telegram": "",
       "x": ""
+    },
+    "adsense": {
+      "enabled": true,
+      "publisherId": "ca-pub-XXXXXXXXXXXXXXXX",
+      "showPlaceholders": true
     }
   },
   "exams": [
@@ -1113,92 +1118,125 @@ window.VIBHI_DATA = {
   ],
   "papers": [
     {
-      "exam": "ssc",
-      "title": "SSC CGL — Model Paper 01",
-      "year": 2026,
-      "type": "html",
-      "file": ""
-    },
-    {
       "exam": "appsc",
-      "title": "APPSC Group 2 — Model Paper 01",
+      "title": "APPSC Group 2 (2026) — Screening Test Comprehensive Model Paper (Bilingual CBT)",
       "year": 2026,
       "type": "html",
-      "file": ""
-    },
-    {
-      "exam": "tgpsc",
-      "title": "TGPSC Group 1 — Model Paper 01",
-      "year": 2026,
-      "type": "html",
-      "file": ""
-    },
-    {
-      "exam": "rrb",
-      "title": "RRB NTPC — Model Paper 01",
-      "year": 2026,
-      "type": "html",
-      "file": ""
-    },
-    {
-      "exam": "banking",
-      "title": "SBI — Model Paper 01",
-      "year": 2026,
-      "type": "html",
-      "file": ""
+      "file": "appsc-group2-screening-model-2026.html"
     },
     {
       "exam": "upsc",
-      "title": "UPSC Prelims GS — Previous Paper",
-      "year": 2023,
+      "title": "UPSC Civil Services Prelims (2026) — GS Paper 1 Full Mock Test",
+      "year": 2026,
       "type": "html",
-      "file": ""
+      "file": "upsc-prelims-gs1-mock-2026.html"
     },
     {
-      "exam": "jee",
-      "title": "JEE Main — Previous Paper",
-      "year": 2025,
+      "exam": "ssc",
+      "title": "SSC CGL (2026) — Tier 1 CBT Full Mock Test (Quant, Reasoning, GA, English)",
+      "year": 2026,
       "type": "html",
-      "file": ""
+      "file": "ssc-cgl-tier1-mock-test-2026.html"
     },
     {
-      "exam": "neet",
-      "title": "NEET UG — Previous Paper",
-      "year": 2025,
+      "exam": "tgpsc",
+      "title": "TGPSC Group 1 (2026) — Preliminary Exam Master Practice Test",
+      "year": 2026,
       "type": "html",
-      "file": ""
+      "file": "tgpsc-group1-prelims-practice-2026.html"
+    },
+    {
+      "exam": "rrb",
+      "title": "RRB NTPC (2026) — Stage 1 CBT Full Model Paper",
+      "year": 2026,
+      "type": "html",
+      "file": "rrb-ntpc-cbt1-model-paper-2026.html"
+    },
+    {
+      "exam": "banking",
+      "title": "IBPS PO & SBI Clerk (2026) — Banking Prelims Speed Mock Test",
+      "year": 2026,
+      "type": "html",
+      "file": "ibps-sbi-po-prelims-mock-2026.html"
+    },
+    {
+      "exam": "upsc",
+      "title": "UPSC Civil Services Prelims 2024 — General Studies Paper 1 (Official)",
+      "year": 2024,
+      "type": "pdf",
+      "url": "https://upsc.gov.in/sites/default/files/QP-CSP-24-GS-P1.pdf"
+    },
+    {
+      "exam": "upsc",
+      "title": "UPSC Civil Services Prelims 2024 — CSAT Paper 2 (Official)",
+      "year": 2024,
+      "type": "pdf",
+      "url": "https://upsc.gov.in/sites/default/files/QP-CSP-24-CSAT-P2.pdf"
+    },
+    {
+      "exam": "appsc",
+      "title": "APPSC Group 2 (2024) — Screening Test Official Question Paper & Key",
+      "year": 2024,
+      "type": "pdf",
+      "url": "https://psc.ap.gov.in"
+    },
+    {
+      "exam": "tgpsc",
+      "title": "TGPSC Group 1 (2024) — Preliminary Examination Official Master Question Paper",
+      "year": 2024,
+      "type": "pdf",
+      "url": "https://websitenew.tspsc.gov.in"
+    },
+    {
+      "exam": "ssc",
+      "title": "SSC CGL (2024) — Tier 1 Official Question Paper & Model Key",
+      "year": 2024,
+      "type": "pdf",
+      "url": "https://ssc.gov.in"
+    },
+    {
+      "exam": "rrb",
+      "title": "RRB NTPC — Stage 1 CBT Official Previous Year Question Paper",
+      "year": 2022,
+      "type": "pdf",
+      "url": "https://www.rrbcdg.gov.in"
     }
   ],
   "channels": [
     {
-      "exam": "ssc",
-      "desc": "Updates • Study Material • Current Affairs",
-      "url": ""
-    },
-    {
       "exam": "appsc",
-      "desc": "Updates • Study Material • Current Affairs",
-      "url": ""
+      "desc": "APPSC Group 1, 2, 4 • Daily AP Current Affairs, Study Material & Notification Alerts",
+      "url": "https://wa.me/917032800484?text=Hi%20Akshay%2C%20please%20add%20me%20to%20the%20APPSC%20Exam%20WhatsApp%20Channel%20for%20daily%20notes%20and%20mock%20tests"
     },
     {
       "exam": "tgpsc",
-      "desc": "Updates • Study Material • Current Affairs",
-      "url": ""
+      "desc": "TGPSC Group 1, 2, 3 • Telangana History, Movement & Daily Current Affairs Notes",
+      "url": "https://wa.me/917032800484?text=Hi%20Akshay%2C%20please%20add%20me%20to%20the%20TGPSC%20Exam%20WhatsApp%20Channel%20for%20daily%20updates"
     },
     {
       "exam": "upsc",
-      "desc": "Current Affairs • Policy • Important News",
-      "url": ""
+      "desc": "UPSC Civil Services • Daily Editorial Summaries, Prelims & Mains Roadmaps",
+      "url": "https://wa.me/917032800484?text=Hi%20Akshay%2C%20please%20add%20me%20to%20the%20UPSC%20Civil%20Services%20WhatsApp%20Channel"
+    },
+    {
+      "exam": "ssc",
+      "desc": "SSC CGL, CHSL, MTS • Speed Math Shortcuts, Daily Reasoning & Grammar Notes",
+      "url": "https://wa.me/917032800484?text=Hi%20Akshay%2C%20please%20add%20me%20to%20the%20SSC%20Exam%20WhatsApp%20Channel"
     },
     {
       "exam": "rrb",
-      "desc": "Exam Updates • Admit Card • Result",
-      "url": ""
+      "desc": "RRB NTPC & Group D • Railway Exam Alerts, Science MCQs & Admit Card Updates",
+      "url": "https://wa.me/917032800484?text=Hi%20Akshay%2C%20please%20add%20me%20to%20the%20RRB%20Railways%20WhatsApp%20Channel"
     },
     {
       "exam": "banking",
-      "desc": "Job Alerts • Study Material • Current Affairs",
-      "url": ""
+      "desc": "IBPS PO, Clerk & SBI • Banking Awareness, Daily Puzzles & Job Alerts",
+      "url": "https://wa.me/917032800484?text=Hi%20Akshay%2C%20please%20add%20me%20to%20the%20Banking%20Exam%20WhatsApp%20Channel"
+    },
+    {
+      "exam": "dsc",
+      "desc": "Andhra & Telangana DSC / TET • Pedagogy, Subject Content & Model Tests",
+      "url": "https://wa.me/917032800484?text=Hi%20Akshay%2C%20please%20add%20me%20to%20the%20DSC%20TET%20WhatsApp%20Channel"
     }
   ],
   "magazines": [
@@ -1228,6 +1266,7 @@ window.VIBHI_DATA = {
       "id": "appsc-group2-strategy-2026",
       "date": "2026-10-10",
       "category": "APPSC",
+      "image": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80",
       "title_en": "APPSC Group 2 2026 — Complete Preparation Strategy",
       "title_te": "APPSC Group 2 2026 — పూర్తి ప్రిపరేషన్ స్ట్రాటజీ",
       "desc_en": "Step-by-step study plan, subjects, mock tests and current affairs strategy for APPSC Group 2.",
@@ -1239,21 +1278,78 @@ window.VIBHI_DATA = {
       "id": "daily-ca-how-to-use",
       "date": "2026-10-08",
       "category": "Current Affairs",
+      "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80",
       "title_en": "How to Use Daily Current Affairs for UPSC, APPSC & TGPSC",
       "title_te": "UPSC, APPSC & TGPSC కోసం డైలీ కరెంట్ అఫైర్స్ ఎలా ఉపయోగించాలి",
       "desc_en": "Simple method to revise current affairs daily and link them to static subjects.",
       "desc_te": "రోజువారీ కరెంట్ అఫైర్స్ రివైజ్ చేసి స్టాటిక్ సబ్జెక్టులకు లింక్ చేసే సింపుల్ పద్ధతి.",
       "body_en": "<p>Current affairs decide many marks in Prelims and Mains. Follow a fixed daily routine.</p><h3>Daily routine (30–40 mins)</h3><ul><li>Read 8–10 important news points</li><li>Note 2–3 points under Polity / Economy / Schemes</li><li>Revise yesterday notes for 5 minutes</li></ul><p>On Learn with Akshay website you can explore roadmaps, papers and channels <b>without login</b>. Full AI practice is in the app.</p>",
       "body_te": "<p>కరెంట్ అఫైర్స్ ప్రిలిమ్స్ మరియు మెయిన్స్‌లో చాలా మార్కులు నిర్ణయిస్తాయి. రోజువారీ ఫిక్స్‌డ్ రొటీన్ పాటించండి.</p><h3>రోజువారీ రొటీన్ (30–40 నిమిషాలు)</h3><ul><li>8–10 ముఖ్యమైన న్యూస్ పాయింట్లు చదవండి</li><li>పాలిటీ / ఎకానమీ / స్కీమ్స్ కింద 2–3 పాయింట్లు నోట్ చేయండి</li><li>నిన్నటి నోట్స్ 5 నిమిషాలు రివైజ్ చేయండి</li></ul><p>Learn with Akshay వెబ్‌సైట్‌లో రోడ్‌మ్యాప్స్, పేపర్స్ మరియు ఛానెల్స్ <b>లాగిన్ లేకుండా</b> చూడవచ్చు. పూర్తి AI ప్రాక్టీస్ యాప్‌లో ఉంది.</p>"
+    },
+    {
+      "id": "upsc-cse-complete-preparation-guide-2026",
+      "date": "2026-10-14",
+      "category": "UPSC",
+      "image": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80",
+      "title_en": "UPSC Civil Services 2026: Complete 1-Year Master Plan for Prelims & Mains",
+      "title_te": "UPSC సివిల్ సర్వీసెస్ 2026: ప్రిలిమ్స్ & మెయిన్స్ కోసం పూర్తి 1-సంవత్సరం మాస్టర్ ప్లాన్",
+      "desc_en": "Comprehensive month-by-month strategy, NCERT foundation, GS Paper 1–4 breakdown, CSAT qualification, and answer writing roadmap.",
+      "desc_te": "నెలలవారీ ప్రిపరేషన్ స్ట్రాటజీ, NCERT బేసిక్స్, GS 1-4 సిలబస్, CSAT అర్హత మరియు ఆన్సర్ రైటింగ్ గైడ్.",
+      "body_en": "<p>The UPSC Civil Services Examination (CSE) is one of the most prestigious competitive exams in India. Qualifying requires consistent disciplined preparation, structured syllabus coverage, and extensive revision.</p><h3>Phase 1: Foundation Building (Months 1 to 4)</h3><p>Begin with Class 6–12 NCERT textbooks for History, Geography, Polity (Indian Constitution at Work), and Economy. Strong fundamentals prevent negative marking in Prelims and form the backbone of analytical answers in Mains.</p><ul><li><b>Indian Polity:</b> Read M. Laxmikanth thoroughly alongside constitutional landmark judgments.</li><li><b>Modern Indian History:</b> Spectrum by Rajiv Ahir and NCERT Bipan Chandra.</li><li><b>Geography:</b> GC Leong and NCERTs with map pointing practice.</li><li><b>Economy:</b> Nitin Singhania / Ramesh Singh fundamentals with the latest Union Budget &amp; Economic Survey.</li></ul><h3>Phase 2: Mains Integrated Study &amp; Optional Subject (Months 5 to 8)</h3><p>Mains comprises 1750 marks. Dedicate at least 3 hours daily to your chosen Optional subject (Paper 1 &amp; Paper 2). Begin daily answer writing practice (2 questions per day from previous 10-year question papers).</p><h3>Phase 3: Prelims Intensive &amp; CSAT Mastery (Last 4 Months)</h3><p>Shift focus solely to Prelims 100 days prior to the exam date:</p><ul><li>Solve at least 45 to 60 full-length mock tests with in-depth question analysis.</li><li>Do not neglect CSAT (Paper II) — practice reading comprehension, logical reasoning, and basic numeracy daily for 1 hour to comfortably exceed the 33% qualifying threshold.</li><li>Revise current affairs compilations for the past 18 months.</li></ul><p>Explore free UPSC syllabus roadmaps and previous year question papers right here on Learn with Akshay with no login required.</p>",
+      "body_te": "<p>యూపీఎస్సీ సివిల్ సర్వీసెస్ పరీక్షలో విజయం సాధించడానికి నిరంతర సాధన, క్రమశిక్షణ మరియు సమగ్ర సిలబస్ అవగాహన అవసరం. ఈ గైడ్ 1 సంవత్సర మాస్టర్ ప్లాన్ అందిస్తుంది.</p><h3>దశ 1: ఫౌండేషన్ నిర్మాణం (1 నుండి 4 నెలలు)</h3><p>చరిత్ర, భూగోళశాస్త్రం, పాలిటీ మరియు ఎకానమీ కోసం 6 నుండి 12వ తరగతి NCERT పాఠ్యపుస్తకాలతో ప్రారంభించండి. ప్రాథమిక భావనలు ప్రిలిమ్స్‌లో నెగటివ్ మార్కింగ్‌ను నివారిస్తాయి.</p><h3>దశ 2: మెయిన్స్ & ఆప్షనల్ సబ్జెక్ట్ ప్రిపరేషన్ (5 నుండి 8 నెలలు)</h3><p>మెయిన్స్ 1750 మార్కులకు ఉంటుంది. మీ ఆప్షనల్ సబ్జెక్ట్ కోసం ప్రతిరోజూ కనీసం 3 గంటలు కేటాయించండి. గత 10 సంవత్సరాల ప్రశ్నపత్రాల నుండి రోజుకు 2 ప్రశ్నలకు సమాధానాలు రాయడం సాధన చేయండి.</p><h3>దశ 3: ప్రిలిమ్స్ ఇంటెన్సివ్ రివిజన్ & CSAT (చివరి 4 నెలలు)</h3><ul><li>పూర్తి విశ్లేషణతో కనీసం 45 నుండి 60 మాక్ టెస్టులను ప్రాక్టీస్ చేయండి.</li><li>CSAT పేపర్‌ను అలక్ష్యం చేయకండి; 33% క్వాలిఫైయింగ్ మార్కులు సాధించడానికి రోజూ 1 గంట కేటాయించండి.</li></ul>"
+    },
+    {
+      "id": "tgpsc-group1-group2-strategy-2026",
+      "date": "2026-10-12",
+      "category": "TGPSC",
+      "image": "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=800&q=80",
+      "title_en": "TGPSC Group 1 & 2: Complete Preparation Blueprint & Telangana History Focus",
+      "title_te": "TGPSC గ్రూప్ 1 & 2: పూర్తి ప్రిపరేషన్ బ్లూప్రింట్ & తెలంగాణ చరిత్ర స్పెషల్ గైడ్",
+      "desc_en": "Detailed subject roadmap, Telangana Movement & State Formation tips, Telugu Academy references, and Mains answer writing techniques.",
+      "desc_te": "సిలబస్ విశ్లేషణ, తెలంగాణ ఉద్యమం & రాష్ట్ర అవతరణ అంశాలు, తెలుగు అకాడమీ పుస్తకాలు మరియు మెయిన్స్ మార్గదర్శి.",
+      "body_en": "<p>Preparing for Telangana Public Service Commission (TGPSC) Group 1 and Group 2 services requires specialized knowledge of Telangana history, society, geography, economy, and the Telangana movement.</p><h3>Core Focus Areas for TGPSC</h3><ul><li><b>Telangana Movement and State Formation:</b> This is the highest scoring and most critical component. Master the three phases: Idea of Telangana (1948–1970), Mobilizational Phase (1971–1990), and Towards Formation of Telangana State (1991–2014).</li><li><b>Telangana History &amp; Culture:</b> Satavahanas, Ikshvakus, Vishnukundins, Chalukyas, Kakatiyas, Qutb Shahis, and Asaf Jahis, along with folk arts, literature, and festivals like Bathukamma and Bonalu.</li><li><b>Telangana Economy:</b> State per capita income, industrial policies (TS-iPASS), Rythu Bandhu, irrigation projects, and welfare schemes.</li><li><b>General Studies &amp; Mental Ability:</b> National and international current affairs, disaster management, environmental issues, and logical reasoning.</li></ul><h3>Recommended Study Routine</h3><p>Allocate 40% of your daily study time to Telangana specific topics, 35% to national General Studies, and 25% to daily current affairs revision and MCQ practice. Utilize the free TGPSC syllabus and model question papers available on Learn with Akshay.</p>",
+      "body_te": "<p>తెలంగాణ పబ్లిక్ సర్వీస్ కమిషన్ (TGPSC) గ్రూప్ 1 మరియు గ్రూప్ 2 పరీక్షల్లో విజయం సాధించడానికి తెలంగాణ ఉద్యమ చరిత్ర, సంస్కృతి మరియు రాష్ట్ర ఆర్థిక వ్యవస్థపై ప్రత్యేక పట్టు అవసరం.</p><h3>ముఖ్యమైన ఫోకస్ రంగాలు:</h3><ul><li><b>తెలంగాణ ఉద్యమం మరియు రాష్ట్ర అవతరణ:</b> 1948 నుండి 2014 వరకు మూడు ముఖ్యమైన దశలను క్షుణ్ణంగా అధ్యయనం చేయండి.</li><li><b>తెలంగాణ చరిత్ర మరియు సంస్కృతి:</b> శాతవాహనులు, కాకతీయులు, కుతుబ్ షాహీలు మరియు అసఫ్ జాహీల కాలం, జానపద కళలు, పండుగలు.</li><li><b>తెలంగాణ ఎకానమీ:</b> బడ్జెట్, సామాజిక-ఆర్థిక సర్వే మరియు రాష్ట్ర సంక్షేమ పథకాలు.</li></ul>"
+    },
+    {
+      "id": "ssc-cgl-chsl-quantitative-aptitude-guide",
+      "date": "2026-10-11",
+      "category": "SSC",
+      "image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80",
+      "title_en": "SSC CGL & CHSL 2026: Quantitative Aptitude & Reasoning Speed Mastery Guide",
+      "title_te": "SSC CGL & CHSL 2026: క్వాంటిటేటివ్ ఆప్టిట్యూడ్ & రీజనింగ్ వేగం పెంచే మార్గదర్శి",
+      "desc_en": "Speed calculation techniques, advanced math formulas, reasoning shortcuts, and mock test score acceleration tips for Tier 1 & Tier 2.",
+      "desc_te": "స్పీడ్ మ్యాథ్స్ టెక్నిక్స్, అడ్వాన్స్‌డ్ మ్యాథ్స్ సూత్రాలు, రీజనింగ్ షార్ట్‌కట్‌లు మరియు మాక్ టెస్ట్ స్కోర్ పెంచే చిట్కాలు.",
+      "body_en": "<p>Staff Selection Commission (SSC) exams like CGL and CHSL test both accuracy and raw solving speed. With sectional time limits and negative marking, mastering time management is essential.</p><h3>1. Speed Arithmetic &amp; Vedic Math</h3><p>Memorize tables up to 30, squares up to 50, cubes up to 25, and fraction-to-percentage conversions (e.g., 1/7 = 14.28%, 1/8 = 12.5%). Practicing 15 minutes of rapid calculation every morning saves 8–10 minutes during the actual exam.</p><h3>2. High-Yield Quant Topics</h3><ul><li><b>Advanced Mathematics:</b> Geometry, Trigonometry, Mensuration (2D &amp; 3D), and Algebra account for nearly 40–50% of Tier 1 &amp; Tier 2 Quant.</li><li><b>Arithmetic:</b> Profit &amp; Loss, Ratio &amp; Proportion, Time &amp; Work, and Simple/Compound Interest. Use concept-based unit methods rather than lengthy formula substitutions.</li></ul><h3>3. Reasoning Shortcuts</h3><p>Focus on Syllogisms (using Venn diagrams), Coding-Decoding, Non-Verbal series, Blood Relations, and Direction Sense. Aim to complete the 25 reasoning questions within 14–16 minutes with 95%+ accuracy.</p><h3>4. Mock Strategy</h3><p>Take at least 2 full-length mocks per week initially, scaling to daily mocks 30 days before Tier 1. Analyze every incorrect answer and question left unattempted.</p>",
+      "body_te": "<p>SSC CGL మరియు CHSL పరీక్షల్లో ఎక్కువ మార్కులు సాధించడానికి వేగం మరియు ఖచ్చితత్వం అత్యంత ముఖ్యం. ఈ ఆర్టికల్‌లో సమర్థవంతమైన షార్ట్‌కట్‌లు అందించబడ్డాయి.</p><h3>1. స్పీడ్ లెక్కలు & టేబుల్స్</h3><p>30 వరకు ఎక్కాలు, 50 వరకు వర్గాలు (Squares), 25 వరకు ఘనాలు (Cubes) మరియు భిన్నాల శాతాలను కంఠస్థం చేయండి.</p><h3>2. అడ్వాన్స్‌డ్ మ్యాథ్స్:</h3><p>జామెట్రీ, త్రికోణమితి, క్షేత్రగణితం మరియు బీజగణితం పై పట్టు సాధించండి. ఇవి దాదాపు 50% మార్కులను కలిగి ఉంటాయి.</p>"
+    },
+    {
+      "id": "banking-exams-ibps-sbi-po-roadmap",
+      "date": "2026-10-09",
+      "category": "Banking",
+      "image": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
+      "title_en": "Banking Exams 2026 (IBPS PO, SBI PO, Clerk): Complete Preparation Strategy",
+      "title_te": "బ్యాంకింగ్ పరీక్షలు 2026 (IBPS PO, SBI PO, క్లర్క్): పూర్తి ప్రిపరేషన్ వ్యూహం",
+      "desc_en": "How to conquer sectional cutoffs, master High-Level Puzzles, Data Interpretation sets, and Banking Awareness.",
+      "desc_te": "సెక్షనల్ కటాఫ్ క్లియర్ చేయడం, హై లెవెల్ పజిల్స్, డేటా ఇంటర్‌ప్రిటేషన్ మరియు బ్యాంకింగ్ అవేర్‌నెస్ ప్రిపరేషన్ గైడ్.",
+      "body_en": "<p>Banking examinations conducted by IBPS and SBI demand rapid decision-making and strong conceptual clarity. Understanding sectional cutoffs and smart question selection is the key to clearing both Prelims and Mains.</p><h3>1. English Language Section</h3><p>Read editorial columns daily (The Hindu or Indian Express) to build reading speed and vocabulary for Reading Comprehension (RC). Master basic grammar rules: Subject-Verb Agreement, Prepositions, Tenses, and Error Spotting rules.</p><h3>2. Reasoning Ability &amp; High-Level Puzzles</h3><p>Floor-based puzzles, circular/linear seating arrangements with multiple variables, and input-output problems carry substantial weight in Mains. Practice 4–5 diverse puzzle sets every day with a timer.</p><h3>3. Quantitative Aptitude &amp; Data Interpretation (DI)</h3><p>In Prelims, secure quick marks through Quadratic Equations, Number Series (Missing &amp; Wrong), and Simplification/Approximation. For Mains, focus on Caselet DI, Radar DI, and Arithmetic-based DI sets.</p><h3>4. Banking &amp; Financial Awareness</h3><p>Maintain notes on RBI monetary policy rates, Basel norms, priority sector lending (PSL), inflation metrics (CPI/WPI), UPI/digital banking innovations, and national financial schemes. Revise the last 6 months of banking current affairs.</p>",
+      "body_te": "<p>IBPS PO, SBI PO మరియు క్లర్క్ పరీక్షల్లో ప్రిలిమ్స్ మరియు మెయిన్స్ క్లియర్ చేయడానికి సెక్షనల్ టైమింగ్ నిర్వహణ చాలా ముఖ్యం.</p><h3>ముఖ్య వ్యూహాలు:</h3><ul><li><b>రీజనింగ్ & పజిల్స్:</b> ప్రతిరోజూ టైమర్‌తో 4 నుండి 5 పజిల్స్ మరియు సీటింగ్ అరేంజ్‌మెంట్‌లను ప్రాక్టీస్ చేయండి.</li><li><b>డాటా ఇంటర్‌ప్రిటేషన్ (DI):</b> పై చార్టులు, బార్ గ్రాఫ్‌లు మరియు కేస్‌లెట్ DI పై దృష్టి సారించండి.</li><li><b>బ్యాంకింగ్ అవేర్‌నెస్:</b> RBI పాలసీ రేట్లు, బడ్జెట్ మరియు గత 6 నెలల ఆర్థిక కరెంట్ అఫైర్స్ రివైజ్ చేయండి.</li></ul>"
     }
   ],
   "banners": [
     {
-      "id": "welcome",
-      "title": "Free Mock Tests & Roadmaps",
-      "subtitle": "UPSC, APPSC, TGPSC, SSC, RRB, IBPS — no login required on website",
-      "image": "",
-      "link": "exams.html",
+      "id": "cbt-mock-tests",
+      "title": "2026 Interactive CBT Model Papers Now Live",
+      "subtitle": "Practice full mock tests for APPSC, UPSC, SSC, TGPSC, RRB & Banking with instant score & keys",
+      "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",
+      "link": "papers.html",
+      "active": true
+    },
+    {
+      "id": "study-roadmaps",
+      "title": "Free 1-Year Strategic Study Roadmaps",
+      "subtitle": "Syllabus breakdown, day-by-day plan & bilingual study material without login",
+      "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80",
+      "link": "roadmaps.html",
       "active": true
     }
   ],
